@@ -159,7 +159,7 @@ if(step===0){for(const interval of [0,3,7])synth(root+12+interval,t,stepSec*14,.
  const root=hyperRoots[bar%hyperRoots.length],stepSec=60/192/4;
  // Driving four-on-the-floor kick, extra pick-up kicks and crisp metallic backbeats.
  if(step%4===0)kick(t,true);
- if(step===3||step===11||step===15)kick(t,.0===1);
+ if(step===3||step===11||step===15)kick(t,false);
  if(step===4||step===12){noiseHit(t,.13,.25,2000);synth(48,t,.075,.085,'triangle',0,.003)}
  if(step%2===0)noiseHit(t,.035,step%4===2?.088:.032,7000);
  if(step===6||step===14)noiseHit(t,.10,.08,5200);
