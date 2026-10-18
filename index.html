@@ -164,7 +164,13 @@ const step=60/(selectedTrack==='techno'?148:90)/4;
 let iterations=0;
 while(stepTime<audio.currentTime+.13&&iterations++<4){musicStep(stepTime,stepIndex++);stepTime+=step}
 }
-function resetMusicSequence(){stepIndex=0;if(audio)stepTime=audio.currentTime+.06}
+function resetMusicSequence(){
+stepIndex=0;if(!audio)return;stepTime=audio.currentTime+.06;
+if(musicBus){const oldBus=musicBus;
+oldBus.gain.setTargetAtTime(0,audio.currentTime,.025);
+musicBus=audio.createGain();musicBus.gain.setValueAtTime(0,audio.currentTime);musicBus.connect(audio.destination);
+applyAudioLevels();setTimeout(()=>{try{oldBus.disconnect()}catch(e){}},800)}
+}
 $('soundtrack').addEventListener('change',()=>{selectedTrack=$('soundtrack').value;resetMusicSequence();try{localStorage.setItem('asteroidRush.track',selectedTrack)}catch(e){};initAudio()});
 $('musicVolume').addEventListener('input',e=>{$('musicVolLabel').textContent=e.target.value+'%';applyAudioLevels()});
 function held(control){const map={left:['ArrowLeft','KeyA'],right:['ArrowRight','KeyD'],thrust:['ArrowUp','KeyW'],fire:['Space']};return touch.has(control)||map[control].some(k=>keys.has(k))}
