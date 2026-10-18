@@ -10,22 +10,21 @@
 *{box-sizing:border-box}html{min-height:100%;background:#030714}body{margin:0;min-height:100vh;color:#e9f7ff;font:15px system-ui,Segoe UI,Arial,sans-serif;background:radial-gradient(ellipse at 50% -18%,#17336b 0%,#070e27 35%,#030713 80%);overflow-x:hidden}
 h1,h2,h3,p{margin-top:0}button,input{font:inherit}button{cursor:pointer;touch-action:none}
 .site{max-width:1570px;margin:auto;padding:19px 14px 28px}.masthead{text-align:center;margin-bottom:13px}.masthead h1{font-size:clamp(29px,3.4vw,46px);margin:0;line-height:1.1;letter-spacing:.16em;color:#b8f6ff;text-shadow:0 0 11px #00b3ff,0 0 36px #1868dd}
-.layout{display:grid;grid-template-columns:minmax(175px,210px) minmax(0,960px) minmax(260px,290px);align-items:start;justify-content:center;gap:15px}
+.layout{display:grid;grid-template-columns:minmax(260px,290px) minmax(0,960px) minmax(175px,210px);align-items:start;justify-content:center;gap:15px}
 .panel{border:1px solid #2e517c;border-radius:16px;padding:18px;background:linear-gradient(155deg,#10254adf,#071229ef);box-shadow:0 0 32px #167ab71f,inset 0 1px #a3e6ff19;min-width:0}.panel h2{font-size:17px;text-align:center;letter-spacing:.115em;color:#95edff;margin:0 0 21px;text-shadow:0 0 14px #00bbff44}
 .stat{padding:16px 0;border-bottom:1px solid #ffffff19}.stat:first-of-type{padding-top:0}.stat label{display:block;color:#8fa6c5;letter-spacing:.14em;font-size:11px;font-weight:750;margin-bottom:6px}.stat strong{font-size:29px;letter-spacing:.07em;font-variant-numeric:tabular-nums;text-shadow:0 0 18px #3dccff53}.stat strong.coral{color:#ff8ca9}
 .arena{min-width:0}.screen{position:relative;border:1px solid #396a93;border-radius:15px;overflow:hidden;background:#030b1a;box-shadow:0 0 42px #128ad533,0 0 0 4px #4dcfff0a}
 canvas{display:block;width:100%;height:auto;aspect-ratio:3/2;touch-action:none}
 .screen:after{content:"";pointer-events:none;position:absolute;inset:0;box-shadow:inset 0 0 45px #0208179c;border-radius:15px}
-.bottom-line{display:flex;gap:12px;justify-content:space-between;align-items:center;color:#7ea4c2;font-size:11px;letter-spacing:.06em;padding:10px 2px}.bottom-line b{color:#8feeff}
 .actions{display:grid;gap:10px}.actions button{min-height:43px;padding:11px;border:1px solid #3586b9;border-radius:9px;color:#ecfaff;font-weight:800;font-size:13px;letter-spacing:.08em;background:linear-gradient(110deg,#16457c,#0d274a);box-shadow:inset 0 1px #ffffff1b}
 .actions button.primary{border-color:#4de2ff;background:linear-gradient(110deg,#006fa8,#1150a5);box-shadow:0 0 23px #0076ff32}
 .actions button:hover{filter:brightness(1.19)}.control-box{border-top:1px solid #ffffff25;margin-top:21px;padding-top:18px}.control-box h3{font-size:19px;letter-spacing:.12em;text-align:center;color:#8adfff;margin-bottom:14px}
 .guide{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:13px 0;border-bottom:1px solid #ffffff1a;font-size:15px;font-weight:800;line-height:1.35}.guide span{color:#d2e7fa}.guide b{color:#80e1ff;text-align:right}
 .volume{display:flex;justify-content:space-between;gap:6px;color:#a7c1de;font-size:13px;font-weight:750;margin-top:20px}input[type=range]{width:100%;accent-color:#5fe4ff;cursor:pointer;margin:11px 0 0}
 .track-label{display:block;color:#a7c1de;font-size:13px;font-weight:750;letter-spacing:.06em;margin:20px 0 9px}#soundtrack{display:block;width:100%;padding:12px 9px;background:#0b2040;color:#e3faff;border:1px solid #418bb8;border-radius:9px;font-size:13px;font-weight:800;cursor:pointer}#soundtrack:focus-visible{outline:2px solid #81eaff;outline-offset:2px}
-.mobile-pad{display:none}.foot{text-align:center;margin-top:17px;font-size:11px;color:#6184a9}
-@media(max-width:1150px){.layout{grid-template-columns:minmax(0,960px) minmax(210px,260px)}.stats{grid-column:1/-1;grid-row:2;display:flex;gap:20px;align-items:center;justify-content:space-around}.stats h2{margin:0}.stats .stat{border:0;padding:0}.settings{grid-column:2;grid-row:1}.arena{grid-column:1;grid-row:1}.site{max-width:1200px}}
-@media(max-width:760px){.site{padding:10px 8px 20px}.masthead{margin-bottom:9px}.layout{display:flex;flex-direction:column;gap:12px}.arena,.settings,.stats{width:100%}.settings{order:2}.stats{order:3;display:flex;flex-wrap:wrap}.stats h2{display:none}.stats .stat strong{font-size:21px}.screen{border-radius:10px}.mobile-pad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-top:11px}.mobile-pad button{min-height:68px;border-radius:12px;border:1px solid #387eac;color:#cbf7ff;background:linear-gradient(165deg,#183b71,#091935);font-size:25px;font-weight:900;box-shadow:inset 0 1px #b6f5ff29;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent}.mobile-pad button:active,.mobile-pad button.held{background:linear-gradient(160deg,#127bb2,#164c98);box-shadow:0 0 18px #25bbff55}.mobile-pad .fire{color:#fff1cd;border-color:#d18a5e;background:linear-gradient(160deg,#8b4639,#442741);font-size:14px;letter-spacing:.04em}.panel{padding:13px}.panel h2{margin-bottom:12px}.actions{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.actions button{font-size:11px;padding:8px 3px}.guide{font-size:15px}.bottom-line{font-size:9px}}
+.mobile-pad{display:none}
+@media(max-width:980px){.layout{grid-template-columns:minmax(235px,285px) minmax(0,960px)}.stats{grid-column:1/-1;grid-row:2;display:flex;gap:20px;align-items:center;justify-content:space-around}.stats h2{margin:0}.stats .stat{border:0;padding:0}.settings{grid-column:1;grid-row:1}.arena{grid-column:2;grid-row:1}.site{max-width:1200px}}
+@media(max-width:760px){.site{padding:10px 8px 20px}.masthead{margin-bottom:9px}.layout{display:flex;flex-direction:column;gap:12px}.arena,.settings,.stats{width:100%}.settings{order:2}.stats{order:3;display:flex;flex-wrap:wrap}.stats h2{display:none}.stats .stat strong{font-size:21px}.screen{border-radius:10px}.mobile-pad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-top:11px}.mobile-pad button{min-height:68px;border-radius:12px;border:1px solid #387eac;color:#cbf7ff;background:linear-gradient(165deg,#183b71,#091935);font-size:25px;font-weight:900;box-shadow:inset 0 1px #b6f5ff29;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent}.mobile-pad button:active,.mobile-pad button.held{background:linear-gradient(160deg,#127bb2,#164c98);box-shadow:0 0 18px #25bbff55}.mobile-pad .fire{color:#fff1cd;border-color:#d18a5e;background:linear-gradient(160deg,#8b4639,#442741);font-size:14px;letter-spacing:.04em}.panel{padding:13px}.panel h2{margin-bottom:12px}.actions{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.actions button{font-size:11px;padding:8px 3px}.guide{font-size:15px}}
 @media(max-width:390px){.mobile-pad{gap:5px}.mobile-pad button{min-height:57px}.masthead h1{font-size:28px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
 </style>
@@ -34,21 +33,9 @@ canvas{display:block;width:100%;height:auto;aspect-ratio:3/2;touch-action:none}
 <div class="site">
 <header class="masthead"><h1>ASTEROID RUSH</h1></header>
 <div class="layout">
-<aside class="panel stats">
-<h2>✦ FLIGHT DATA</h2>
-<div class="stat"><label>SCORE</label><strong id="score">000000</strong></div>
-<div class="stat"><label>HIGH SCORE</label><strong id="best">000000</strong></div>
-<div class="stat"><label>WAVE</label><strong id="wave">01</strong></div>
-<div class="stat"><label>SHIELDS / LIVES</label><strong class="coral" id="lives">♥ ♥ ♥</strong></div>
-</aside>
-<main class="arena">
-<div class="screen"><canvas id="game" width="960" height="640" aria-label="Asteroid Rush arcade game"></canvas></div>
-<div class="bottom-line"><span>✦ <b>NEON SECTOR</b> / SPACE DEFENCE</span><span>LOCAL HIGH SCORE · OFFLINE READY</span></div>
-<div class="mobile-pad" aria-label="Touch controls"><button type="button" data-control="left" aria-label="Rotate left">↶</button><button type="button" data-control="thrust" aria-label="Thrust">▲</button><button type="button" data-control="right" aria-label="Rotate right">↷</button><button class="fire" type="button" data-control="fire" aria-label="Shoot">FIRE</button></div>
-</main>
 <aside class="panel settings">
 <h2>⚙ SETTINGS</h2>
-<div class="actions"><button class="primary" id="start">START / RESTART</button><button id="pause">PAUSE</button><button id="mute">SOUND: ON</button></div>
+<div class="actions"><button class="primary" id="start">START / RESTART</button><button id="pause">PAUSE</button><button id="mute" aria-pressed="false" aria-label="Mute all music and sound effects">MUTE ALL</button></div>
 <div class="volume"><label for="volume">✦ SFX VOLUME</label><span id="volLabel">45%</span></div><input id="volume" type="range" min="0" max="100" value="45">
 <div class="volume"><label for="musicVolume">♫ MUSIC VOLUME</label><span id="musicVolLabel">45%</span></div><input id="musicVolume" type="range" min="0" max="100" value="45">
 <label class="track-label" for="soundtrack">♫ SOUNDTRACK</label><select id="soundtrack"><option value="ambient">01 · NEBULA DRIFT — CHILL</option><option value="techno">02 · BASS REACTOR — TECHNO</option></select>
@@ -60,8 +47,18 @@ canvas{display:block;width:100%;height:auto;aspect-ratio:3/2;touch-action:none}
 <div class="guide"><span>ENTER</span><b>START / RESTART</b></div>
 </div>
 </aside>
+<main class="arena">
+<div class="screen"><canvas id="game" width="960" height="640" aria-label="Asteroid Rush arcade game"></canvas></div>
+<div class="mobile-pad" aria-label="Touch controls"><button type="button" data-control="left" aria-label="Rotate left">↶</button><button type="button" data-control="thrust" aria-label="Thrust">▲</button><button type="button" data-control="right" aria-label="Rotate right">↷</button><button class="fire" type="button" data-control="fire" aria-label="Shoot">FIRE</button></div>
+</main>
+<aside class="panel stats">
+<h2>✦ FLIGHT DATA</h2>
+<div class="stat"><label>SCORE</label><strong id="score">000000</strong></div>
+<div class="stat"><label>HIGH SCORE</label><strong id="best">000000</strong></div>
+<div class="stat"><label>WAVE</label><strong id="wave">01</strong></div>
+<div class="stat"><label>SHIELDS / LIVES</label><strong class="coral" id="lives">♥ ♥ ♥</strong></div>
+</aside>
 </div>
-<div class="foot">ASTEROID RUSH · CREATED BY MRJIM</div>
 </div>
 <script>
 (()=>{'use strict';
@@ -204,7 +201,7 @@ ship.x=W/2;ship.y=H/2;ship.vx=0;ship.vy=0;ship.angle=-Math.PI/2;ship.inv=140;
 if(lives<=0){state='gameover';saveBest();applyAudioLevels();beep(95,.5,'triangle',.3,37)}updateHud()}
 function togglePause(){if(state==='playing'){state='paused';$('pause').textContent='RESUME'}else if(state==='paused'){state='playing';$('pause').textContent='PAUSE'}applyAudioLevels()}
 $('start').addEventListener('click',reset);$('pause').addEventListener('click',()=>{initAudio();togglePause()});
-$('mute').addEventListener('click',()=>{muted=!muted;$('mute').textContent=muted?'SOUND: OFF':'SOUND: ON';if(!muted)initAudio();applyAudioLevels()});
+$('mute').addEventListener('click',()=>{muted=!muted;const button=$('mute');button.textContent=muted?'UNMUTE ALL':'MUTE ALL';button.setAttribute('aria-pressed',String(muted));button.setAttribute('aria-label',muted?'Unmute all music and sound effects':'Mute all music and sound effects');if(!muted)initAudio();applyAudioLevels()});
 $('volume').addEventListener('input',e=>{$('volLabel').textContent=e.target.value+'%';applyAudioLevels()});
 document.addEventListener('keydown',e=>{if(e.target instanceof HTMLElement&&e.target.closest('input,select,textarea,[contenteditable="true"]'))return;
 if(['ArrowUp','ArrowLeft','ArrowRight','Space','Enter'].includes(e.code))e.preventDefault();
