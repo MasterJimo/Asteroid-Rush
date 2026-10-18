@@ -38,7 +38,7 @@ canvas{display:block;width:100%;height:auto;aspect-ratio:3/2;touch-action:none}
 <h2>⚙ SETTINGS</h2>
 <div class="actions"><button class="primary" id="start">START / RESTART</button><button id="pause">PAUSE</button><button id="mute" aria-pressed="false" aria-label="Mute all music and sound effects">MUTE ALL</button></div>
 <div class="volume"><label for="volume">✦ SFX VOLUME</label><span id="volLabel">45%</span></div><input id="volume" type="range" min="0" max="100" value="45">
-<div class="volume"><label for="musicVolume">♫ MUSIC VOLUME</label><span id="musicVolLabel">45%</span></div><input id="musicVolume" type="range" min="0" max="100" value="45">
+<div class="volume"><label for="musicVolume">♫ MUSIC VOLUME</label><span id="musicVolLabel">7%</span></div><input id="musicVolume" type="range" min="0" max="100" value="7">
 <label class="track-label" for="soundtrack">♫ SOUNDTRACK</label><select id="soundtrack"><option value="ambient">01 · NEBULA DRIFT — CHILL</option><option value="file">02 · AI FIGHT — 120 BPM</option></select>
 <div class="control-box"><h3>🎮 CONTROLS</h3>
 <div class="guide"><span>← / → or A / D</span><b>ROTATE</b></div>
@@ -79,10 +79,31 @@ function updateHud(){scoreEl.textContent=String(score).padStart(6,'0');bestEl.te
 function saveBest(){if(score>best){best=score;try{localStorage.setItem('asteroidRush.best',String(best))}catch(e){}}}
 // Track 1 is procedural; track 2 uses the user-supplied OGG audio file.
 let sfxBus=null,musicBus=null,noiseBuffer=null,musicTimer=null,stepTime=0,stepIndex=0;
-let selectedTrack='ambient';
+// New installations start with AI Fight at 7% music and 45% SFX.
+// One-time migration applies the revised defaults for returning visitors, too;
+// after that, player changes are preserved across reloads.
+let selectedTrack='file';
 try{
- const saved=localStorage.getItem('asteroidRush.track');
- if(saved==='file'||saved==='techno'||saved==='hyper')selectedTrack='file';
+ const defaultsKey='asteroidRush.audioDefaultsV2';
+ if(localStorage.getItem(defaultsKey)==='1'){
+  const saved=localStorage.getItem('asteroidRush.track');
+  if(saved==='ambient'||saved==='file')selectedTrack=saved;
+  for(const [slider,key,label] of [
+   ['musicVolume','asteroidRush.musicVolume','musicVolLabel'],
+   ['volume','asteroidRush.sfxVolume','volLabel']
+  ]){
+   const value=localStorage.getItem(key);
+   if(value!==null&&/^\d{1,3}$/.test(value)&&Number(value)<=100){
+    $(slider).value=value;
+    $(label).textContent=value+'%';
+   }
+  }
+ }else{
+  localStorage.setItem('asteroidRush.track','file');
+  localStorage.setItem('asteroidRush.musicVolume','7');
+  localStorage.setItem('asteroidRush.sfxVolume','45');
+  localStorage.setItem(defaultsKey,'1');
+ }
 }catch(e){}
 $('soundtrack').value=selectedTrack;
 // Browser-native OGG playback keeps the 4:28 recording intact.
@@ -177,7 +198,7 @@ musicBus=audio.createGain();musicBus.gain.setValueAtTime(0,audio.currentTime);mu
 applyAudioLevels();setTimeout(()=>{try{oldBus.disconnect()}catch(e){}},800)}
 }
 $('soundtrack').addEventListener('change',()=>{selectedTrack=$('soundtrack').value;resetMusicSequence();try{localStorage.setItem('asteroidRush.track',selectedTrack)}catch(e){};initAudio();applyAudioLevels()});
-$('musicVolume').addEventListener('input',e=>{$('musicVolLabel').textContent=e.target.value+'%';applyAudioLevels()});
+$('musicVolume').addEventListener('input',e=>{$('musicVolLabel').textContent=e.target.value+'%';try{localStorage.setItem('asteroidRush.musicVolume',e.target.value)}catch(e){};applyAudioLevels()});
 function held(control){const map={left:['ArrowLeft','KeyA'],right:['ArrowRight','KeyD'],thrust:['ArrowUp','KeyW'],fire:['Space']};return touch.has(control)||map[control].some(k=>keys.has(k))}
 function wrap(p,pad=0){if(p.x<-pad)p.x=W+pad;else if(p.x>W+pad)p.x=-pad;if(p.y<-pad)p.y=H+pad;else if(p.y>H+pad)p.y=-pad}
 function burst(x,y,color,count=18,force=1){for(let i=0;i<count;i++){const a=rand(0,TAU),s=rand(.7,5.2)*force,life=rand(17,43);particles.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s,life,max:life,size:rand(1,3.7),color})}}
@@ -210,7 +231,7 @@ if(lives<=0){state='gameover';saveBest();applyAudioLevels();beep(95,.5,'triangle
 function togglePause(){if(state==='playing'){state='paused';$('pause').textContent='RESUME'}else if(state==='paused'){state='playing';$('pause').textContent='PAUSE'}applyAudioLevels()}
 $('start').addEventListener('click',reset);$('pause').addEventListener('click',()=>{initAudio();togglePause()});
 $('mute').addEventListener('click',()=>{muted=!muted;const button=$('mute');button.textContent=muted?'UNMUTE ALL':'MUTE ALL';button.setAttribute('aria-pressed',String(muted));button.setAttribute('aria-label',muted?'Unmute all music and sound effects':'Mute all music and sound effects');if(!muted)initAudio();applyAudioLevels()});
-$('volume').addEventListener('input',e=>{$('volLabel').textContent=e.target.value+'%';applyAudioLevels()});
+$('volume').addEventListener('input',e=>{$('volLabel').textContent=e.target.value+'%';try{localStorage.setItem('asteroidRush.sfxVolume',e.target.value)}catch(e){};applyAudioLevels()});
 document.addEventListener('keydown',e=>{if(e.target instanceof HTMLElement&&e.target.closest('input,select,textarea,[contenteditable="true"]'))return;
 if(['ArrowUp','ArrowLeft','ArrowRight','Space','Enter'].includes(e.code))e.preventDefault();
 if(e.repeat&&(e.code==='Enter'||e.code==='KeyP'))return;
