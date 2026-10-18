@@ -10,6 +10,7 @@
 *{box-sizing:border-box}html{min-height:100%;background:#030714}body{margin:0;min-height:100vh;color:#e9f7ff;font:15px system-ui,Segoe UI,Arial,sans-serif;background:radial-gradient(ellipse at 50% -18%,#17336b 0%,#070e27 35%,#030713 80%);overflow-x:hidden}
 h1,h2,h3,p{margin-top:0}button,input{font:inherit}button{cursor:pointer;touch-action:none}
 .site{max-width:1570px;margin:auto;padding:19px 14px 28px}.masthead{text-align:center;margin-bottom:13px}.masthead h1{font-size:clamp(29px,3.4vw,46px);margin:0;line-height:1.1;letter-spacing:.16em;color:#b8f6ff;text-shadow:0 0 11px #00b3ff,0 0 36px #1868dd}
+.masthead .credit{margin:7px 0 0;font-size:13px;letter-spacing:.11em;color:#9ac6df;text-shadow:0 0 12px #20a7e744}
 .layout{display:grid;grid-template-columns:minmax(260px,290px) minmax(0,960px) minmax(175px,210px);align-items:start;justify-content:center;gap:15px}
 .panel{border:1px solid #2e517c;border-radius:16px;padding:18px;background:linear-gradient(155deg,#10254adf,#071229ef);box-shadow:0 0 32px #167ab71f,inset 0 1px #a3e6ff19;min-width:0}.panel h2{font-size:17px;text-align:center;letter-spacing:.115em;color:#95edff;margin:0 0 21px;text-shadow:0 0 14px #00bbff44}
 .stat{padding:16px 0;border-bottom:1px solid #ffffff19}.stat:first-of-type{padding-top:0}.stat label{display:block;color:#8fa6c5;letter-spacing:.14em;font-size:11px;font-weight:750;margin-bottom:6px}.stat strong{font-size:29px;letter-spacing:.07em;font-variant-numeric:tabular-nums;text-shadow:0 0 18px #3dccff53}.stat strong.coral{color:#ff8ca9}
@@ -31,14 +32,14 @@ canvas{display:block;width:100%;height:auto;aspect-ratio:3/2;touch-action:none}
 </head>
 <body>
 <div class="site">
-<header class="masthead"><h1>ASTEROID RUSH</h1></header>
+<header class="masthead"><h1>ASTEROID RUSH</h1><p class="credit">Created by MrJim</p></header>
 <div class="layout">
 <aside class="panel settings">
 <h2>⚙ SETTINGS</h2>
 <div class="actions"><button class="primary" id="start">START / RESTART</button><button id="pause">PAUSE</button><button id="mute" aria-pressed="false" aria-label="Mute all music and sound effects">MUTE ALL</button></div>
 <div class="volume"><label for="volume">✦ SFX VOLUME</label><span id="volLabel">45%</span></div><input id="volume" type="range" min="0" max="100" value="45">
 <div class="volume"><label for="musicVolume">♫ MUSIC VOLUME</label><span id="musicVolLabel">45%</span></div><input id="musicVolume" type="range" min="0" max="100" value="45">
-<label class="track-label" for="soundtrack">♫ SOUNDTRACK</label><select id="soundtrack"><option value="ambient">01 · NEBULA DRIFT — CHILL</option><option value="techno">02 · BASS REACTOR — TECHNO</option></select>
+<label class="track-label" for="soundtrack">♫ SOUNDTRACK</label><select id="soundtrack"><option value="ambient">01 · NEBULA DRIFT — CHILL</option><option value="techno">02 · BASS REACTOR — TECHNO</option><option value="hyper">03 · VECTOR FRENZY — HYPER TECHNO</option></select>
 <div class="control-box"><h3>🎮 CONTROLS</h3>
 <div class="guide"><span>← / → or A / D</span><b>ROTATE</b></div>
 <div class="guide"><span>↑ or W</span><b>THRUST</b></div>
@@ -76,10 +77,10 @@ bestEl.textContent=String(best).padStart(6,'0');
 for(let i=0;i<160;i++)stars.push({x:rand(0,W),y:rand(0,H),r:rand(.35,1.8),v:rand(.12,.9),a:rand(.2,1)});
 function updateHud(){scoreEl.textContent=String(score).padStart(6,'0');bestEl.textContent=String(best).padStart(6,'0');waveEl.textContent=String(wave).padStart(2,'0');livesEl.textContent='♥ '.repeat(lives).trim()||'—'}
 function saveBest(){if(score>best){best=score;try{localStorage.setItem('asteroidRush.best',String(best))}catch(e){}}}
-// Original procedural music: both tracks are generated in the Web Audio API.
+// All three original soundtracks are synthesized live in Web Audio; no samples or external music files.
 let sfxBus=null,musicBus=null,noiseBuffer=null,musicTimer=null,stepTime=0,stepIndex=0;
 let selectedTrack='ambient';
-try{const saved=localStorage.getItem('asteroidRush.track');if(saved==='ambient'||saved==='techno')selectedTrack=saved}catch(e){}
+try{const saved=localStorage.getItem('asteroidRush.track');if(saved==='ambient'||saved==='techno'||saved==='hyper')selectedTrack=saved}catch(e){}
 $('soundtrack').value=selectedTrack;
 function applyAudioLevels(){if(!audio||!sfxBus||!musicBus)return;
 const now=audio.currentTime;
@@ -129,11 +130,12 @@ env.gain.setValueAtTime(.0001,t);env.gain.exponentialRampToValueAtTime(heavy?.48
 env.gain.exponentialRampToValueAtTime(.0001,t+(heavy?.29:.18));
 osc.connect(env);env.connect(musicBus);osc.start(t);osc.stop(t+.31);
 }
-const chillRoots=[45,41,38,43],technoRoots=[38,38,34,36,38,41,34,36];
+const chillRoots=[45,41,38,43],technoRoots=[38,38,34,36,38,41,34,36],hyperRoots=[42,38,45,40,42,47,38,40];
+const hyperArp=[0,7,12,15,19,12,10,7,3,10,15,22,19,15,12,7],hyperVariation=[0,3,7,12,15,19,24,19,15,12,7,10,12,7,3,0];
 const technoPattern=[0,-1,12,7,0,-1,7,12,0,-1,12,7,0,7,-1,12];
 function musicStep(t,n){
 const step=n%16,bar=Math.floor(n/16),techno=selectedTrack==='techno';
-if(!techno){
+if(selectedTrack==='ambient'){
 const root=chillRoots[bar%chillRoots.length],beat=60/90,stepSec=beat/4;
 if(step===0){for(const semitone of [0,3,7])synth(root+12+semitone,t,stepSec*15,.038,'sine',0,.7);kick(t)}
 if(step===8)kick(t);
@@ -152,12 +154,41 @@ synth(bassNote-12,t,stepSec*1.9,.20,'sine',0,.008)}
 const lead=technoPattern[step];
 if(lead>=0&&step%4!==0){synth(root+24+lead,t,stepSec*1.5,.075,'square',2200,.006)}
 if(step===0){for(const interval of [0,3,7])synth(root+12+interval,t,stepSec*14,.028,'sawtooth',930,.18)}
-}}
+}else{
+ // VECTOR FRENZY — an original 192 BPM neon rave groove with double-time digital arps.
+ const root=hyperRoots[bar%hyperRoots.length],stepSec=60/192/4;
+ // Driving four-on-the-floor kick, extra pick-up kicks and crisp metallic backbeats.
+ if(step%4===0)kick(t,true);
+ if(step===3||step===11||step===15)kick(t,.0===1);
+ if(step===4||step===12){noiseHit(t,.13,.25,2000);synth(48,t,.075,.085,'triangle',0,.003)}
+ if(step%2===0)noiseHit(t,.035,step%4===2?.088:.032,7000);
+ if(step===6||step===14)noiseHit(t,.10,.08,5200);
+ if(step===15)noiseHit(t,.065,.18,6800);
+ // Syncopated rolling bassline with a low sine sub and crunchy filtered saw body.
+ const bassPattern=[0,0,-1,12,0,7,-1,0,0,-1,7,12,0,0,7,12];
+ const bassNote=bassPattern[step];
+ if(bassNote>=0){
+  synth(root+bassNote,t,stepSec*1.3,.23,'sawtooth',760,.006);
+  if(step%2===0||step===15)synth(root+bassNote-12,t,stepSec*1.85,.3,'sine',0,.006);
+ }
+ // Shimmering 16th-note sequence. Vary the melody every other bar.
+ const arp=(bar%2===0?hyperArp:hyperVariation)[step];
+ synth(root+24+arp,t,stepSec*.87,step%4===0?.04:.065,'square',2900,.003);
+ if(step%4===2){
+  synth(root+36+hyperArp[step],t+.013,stepSec*.8,.033,'triangle',0,.003);
+ }
+ // Metallic stabs and a spacious minor chord anchor, composed for this game.
+ if(step===0||step===8){
+  const chord=[0,3,7];
+  for(const interval of chord)synth(root+12+interval,t,stepSec*(step===0?7.4:3.6),.024,'sawtooth',1200,.025);
+ }
+}
+}
 function scheduleMusic(){
 if(!audio||audio.state!=='running')return;
 if(state!=='playing'||document.hidden){stepTime=audio.currentTime+.06;return}
 if(stepTime<audio.currentTime-.2)stepTime=audio.currentTime+.04;
-const step=60/(selectedTrack==='techno'?148:90)/4;
+const step=60/(selectedTrack==='hyper'?192:selectedTrack==='techno'?148:90)/4;
 let iterations=0;
 while(stepTime<audio.currentTime+.13&&iterations++<4){musicStep(stepTime,stepIndex++);stepTime+=step}
 }
