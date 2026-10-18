@@ -25,4 +25,13 @@ Na telefonie pod grą są przyciski dotykowe.
 
 Rozbijaj asteroidy na coraz mniejsze części, unikaj kolizji i przechodź kolejne fale. Masz trzy życia. Rekord zapisuje się lokalnie w przeglądarce.
 
+## Muzyka i efekty
+
+W panelu **Settings** można ustawić oddzielnie głośność **SFX** (efekty) i **Music** (muzyka), a także wybrać jeden z dwóch utworów:
+
+- **Nebula Drift — Chill**: spokojne, kosmiczne brzmienie.
+- **Bass Reactor — Techno**: szybszy rytm i mocny elektroniczny bas.
+
+Muzyka startuje po rozpoczęciu gry, zatrzymuje się przy pauzie i końcu rozgrywki. Przycisk **Sound** wycisza oba kanały. Cała muzyka jest generowana lokalnie przez przeglądarkę — nie wymaga pobierania plików audio.
+
 Wszystko jest zawarte w pojedynczym pliku `index.html` — bez zewnętrznych zasobów, bibliotek i połączenia z internetem.
