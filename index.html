@@ -39,7 +39,7 @@ canvas{display:block;width:100%;height:auto;aspect-ratio:3/2;touch-action:none}
 <div class="actions"><button class="primary" id="start">START / RESTART</button><button id="pause">PAUSE</button><button id="mute" aria-pressed="false" aria-label="Mute all music and sound effects">MUTE ALL</button></div>
 <div class="volume"><label for="volume">✦ SFX VOLUME</label><span id="volLabel">45%</span></div><input id="volume" type="range" min="0" max="100" value="45">
 <div class="volume"><label for="musicVolume">♫ MUSIC VOLUME</label><span id="musicVolLabel">7%</span></div><input id="musicVolume" type="range" min="0" max="100" value="7">
-<label class="track-label" for="soundtrack">♫ SOUNDTRACK</label><select id="soundtrack"><option value="ambient">01 · NEBULA DRIFT — CHILL</option><option value="file">02 · AI FIGHT — 120 BPM</option></select>
+<label class="track-label" for="soundtrack">♫ SOUNDTRACK</label><select id="soundtrack"><option value="ambient">01 · NEBULA DRIFT — CHILL</option><option value="file">02 · FIGHTING THE AI — 120 BPM</option></select>
 <div class="control-box"><h3>🎮 CONTROLS</h3>
 <div class="guide"><span>← / → or A / D</span><b>ROTATE</b></div>
 <div class="guide"><span>↑ or W</span><b>THRUST</b></div>
@@ -79,7 +79,7 @@ function updateHud(){scoreEl.textContent=String(score).padStart(6,'0');bestEl.te
 function saveBest(){if(score>best){best=score;try{localStorage.setItem('asteroidRush.best',String(best))}catch(e){}}}
 // Track 1 is procedural; track 2 uses the user-supplied OGG audio file.
 let sfxBus=null,musicBus=null,noiseBuffer=null,musicTimer=null,stepTime=0,stepIndex=0;
-// New installations start with AI Fight at 7% music and 45% SFX.
+// New installations start with Fighting the AI at 7% music and 45% SFX.
 // One-time migration applies the revised defaults for returning visitors, too;
 // after that, player changes are preserved across reloads.
 let selectedTrack='file';
