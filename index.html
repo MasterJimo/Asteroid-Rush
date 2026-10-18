@@ -23,10 +23,16 @@ canvas{display:block;width:100%;height:auto;aspect-ratio:3/2;touch-action:none}
 .guide{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:13px 0;border-bottom:1px solid #ffffff1a;font-size:15px;font-weight:800;line-height:1.35}.guide span{color:#d2e7fa}.guide b{color:#80e1ff;text-align:right}
 .volume{display:flex;justify-content:space-between;gap:6px;color:#a7c1de;font-size:13px;font-weight:750;margin-top:20px}input[type=range]{width:100%;accent-color:#5fe4ff;cursor:pointer;margin:11px 0 0}
 .track-label{display:block;color:#a7c1de;font-size:13px;font-weight:750;letter-spacing:.06em;margin:20px 0 9px}#soundtrack{display:block;width:100%;padding:12px 9px;background:#0b2040;color:#e3faff;border:1px solid #418bb8;border-radius:9px;font-size:13px;font-weight:800;cursor:pointer}#soundtrack:focus-visible{outline:2px solid #81eaff;outline-offset:2px}
-.mobile-pad{display:none}
+.mobile-pad,.mobile-hint,.mobile-start{display:none}
+.mobile-start[hidden]{display:none!important}
+.mobile-start{position:absolute;inset:0;z-index:3;border:0;border-radius:0;width:100%;height:100%;padding:20px;background:linear-gradient(155deg,#020c1af2,#0c1a35f0);color:#cbfaff;align-items:center;justify-content:center;flex-direction:column;gap:15px;text-align:center;touch-action:manipulation}
+.mobile-start-icon{display:grid;place-items:center;width:68px;height:68px;border:2px solid #62e7ff;border-radius:50%;background:#0a548252;font-size:25px;box-shadow:0 0 28px #18c4ff8c,inset 0 0 25px #10a8ff34}
+.mobile-start strong{font-size:clamp(19px,6vw,30px);letter-spacing:.12em;text-shadow:0 0 22px #18bfff}
+.mobile-start small{font-size:10px;font-weight:800;letter-spacing:.1em;color:#a9cfe1}
+.mobile-hint{font-size:11px;color:#7fbedb;font-weight:800;text-align:center;letter-spacing:.09em;margin-top:8px}
 @media(max-width:980px){.layout{grid-template-columns:minmax(235px,285px) minmax(0,960px)}.stats{grid-column:1/-1;grid-row:2;display:flex;gap:20px;align-items:center;justify-content:space-around}.stats h2{margin:0}.stats .stat{border:0;padding:0}.settings{grid-column:1;grid-row:1}.arena{grid-column:2;grid-row:1}.site{max-width:1200px}}
-@media(max-width:760px){.site{padding:10px 8px 20px}.masthead{margin-bottom:9px}.layout{display:flex;flex-direction:column;gap:12px}.arena,.settings,.stats{width:100%}.settings{order:2}.stats{order:3;display:flex;flex-wrap:wrap}.stats h2{display:none}.stats .stat strong{font-size:21px}.screen{border-radius:10px}.mobile-pad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-top:11px}.mobile-pad button{min-height:68px;border-radius:12px;border:1px solid #387eac;color:#cbf7ff;background:linear-gradient(165deg,#183b71,#091935);font-size:25px;font-weight:900;box-shadow:inset 0 1px #b6f5ff29;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent}.mobile-pad button:active,.mobile-pad button.held{background:linear-gradient(160deg,#127bb2,#164c98);box-shadow:0 0 18px #25bbff55}.mobile-pad .fire{color:#fff1cd;border-color:#d18a5e;background:linear-gradient(160deg,#8b4639,#442741);font-size:14px;letter-spacing:.04em}.panel{padding:13px}.panel h2{margin-bottom:12px}.actions{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.actions button{font-size:11px;padding:8px 3px}.guide{font-size:15px}}
-@media(max-width:390px){.mobile-pad{gap:5px}.mobile-pad button{min-height:57px}.masthead h1{font-size:28px}}
+@media(max-width:760px), (pointer:coarse) and (max-width:1024px){.site{padding:10px 8px 20px}.masthead{margin-bottom:9px}.layout{display:flex;flex-direction:column;gap:12px}.arena,.settings,.stats{width:100%}.settings{order:2}.stats{order:3;display:flex;flex-wrap:wrap}.stats h2{display:none}.stats .stat strong{font-size:21px}.screen{border-radius:10px}.mobile-start:not([hidden]){display:flex}.mobile-pad{display:flex;gap:12px;margin-top:12px}.mobile-hint{display:block}.turn-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;flex:2;min-width:0}.mobile-pad button{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2px;min-height:76px;min-width:0;border-radius:15px;border:1px solid #397fb6;color:#cbf7ff;background:linear-gradient(165deg,#183b71,#091935);font-size:30px;font-weight:900;box-shadow:inset 0 1px #b6f5ff29;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent;touch-action:none}.mobile-pad button small{font-size:11px;letter-spacing:.09em;font-weight:900}.mobile-pad button:active,.mobile-pad button.held{background:linear-gradient(160deg,#127bb2,#164c98);box-shadow:0 0 18px #25bbff55}.mobile-pad .boost{flex:1;color:#fff1cd;border-color:#d18a5e;background:linear-gradient(160deg,#8b4639,#442741)}.panel{padding:13px}.panel h2{margin-bottom:12px}.actions{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.actions button{font-size:11px;padding:8px 3px}.guide{font-size:15px}}
+@media(max-width:390px){.mobile-pad{gap:7px}.turn-controls{gap:7px}.mobile-pad button{min-height:65px}.masthead h1{font-size:28px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
 </style>
 </head>
@@ -49,8 +55,10 @@ canvas{display:block;width:100%;height:auto;aspect-ratio:3/2;touch-action:none}
 </div>
 </aside>
 <main class="arena">
-<div class="screen"><canvas id="game" width="960" height="640" aria-label="Asteroid Rush arcade game"></canvas></div>
-<div class="mobile-pad" aria-label="Touch controls"><button type="button" data-control="left" aria-label="Rotate left">↶</button><button type="button" data-control="thrust" aria-label="Thrust">▲</button><button type="button" data-control="right" aria-label="Rotate right">↷</button><button class="fire" type="button" data-control="fire" aria-label="Shoot">FIRE</button></div>
+<div class="screen"><canvas id="game" width="960" height="640" aria-label="Asteroid Rush arcade game"></canvas>
+<button type="button" id="mobileStart" class="mobile-start" hidden aria-label="Start or resume game"><span class="mobile-start-icon" aria-hidden="true">▶</span><strong id="mobileStartTitle">TAP TO START</strong><small id="mobileStartHint">AUTO-FIRE ENABLED · USE CONTROLS BELOW</small></button></div>
+<div class="mobile-pad" aria-label="Touch controls"><div class="turn-controls"><button type="button" data-control="left" aria-label="Rotate left"><span aria-hidden="true">↶</span><small>LEFT</small></button><button type="button" data-control="right" aria-label="Rotate right"><span aria-hidden="true">↷</span><small>RIGHT</small></button></div><button type="button" class="boost" data-control="thrust" aria-label="Boost"><span aria-hidden="true">▲</span><small>BOOST</small></button></div>
+<div class="mobile-hint">⚡ AUTO-FIRE ON · HOLD BUTTONS TO MOVE</div>
 </main>
 <aside class="panel stats">
 <h2>✦ FLIGHT DATA</h2>
@@ -69,6 +77,13 @@ const $=id=>document.getElementById(id);
 const rand=(a,b)=>a+Math.random()*(b-a);
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const keys=new Set(),touch=new Set();
+const mobileMode=()=>window.matchMedia('(max-width:760px), (pointer:coarse) and (max-width:1024px)').matches;
+function syncMobileStart(){
+ const button=$('mobileStart');button.hidden=state==='playing';
+ const messages={menu:['TAP TO START','AUTO-FIRE ENABLED · USE CONTROLS BELOW'],paused:['TAP TO RESUME','YOUR GAME IS PAUSED'],gameover:['TAP TO RESTART','READY FOR ANOTHER ROUND']};
+ const m=messages[state]||messages.menu;
+ $('mobileStartTitle').textContent=m[0];$('mobileStartHint').textContent=m[1];
+}
 const scoreEl=$('score'),bestEl=$('best'),waveEl=$('wave'),livesEl=$('lives');
 let audio=null,muted=false,state='menu',score=0,best=0,wave=1,lives=3,frame=0,spawnWait=-1;
 let ship=null,rocks=[],bullets=[],particles=[],rings=[],stars=[],trails=[];
@@ -213,7 +228,7 @@ for(let i=0;i<count;i++){let x=0,y=0;for(let n=0;n<80;n++){x=rand(65,W-65);y=ran
 const toward=Math.atan2(ship.y-y,ship.x-x)+rand(-1.8,1.8),spd=rand(.7,1.4)+wave*.11;
 makeRock(x,y,3,Math.cos(toward)*spd,Math.sin(toward)*spd)}
 ship.inv=150;shock(ship.x,ship.y,'#60e8ff');beep(300,.23,'triangle',.15,560);updateHud()}
-function reset(){initAudio();resetMusicSequence();state='playing';applyAudioLevels();score=0;wave=1;lives=3;frame=0;bullets=[];particles=[];rings=[];trails=[];ship={x:W/2,y:H/2,vx:0,vy:0,angle:-Math.PI/2,cool:0,inv:170,thrusting:false};startWave();$('pause').textContent='PAUSE';updateHud()}
+function reset(){initAudio();resetMusicSequence();state='playing';syncMobileStart();applyAudioLevels();score=0;wave=1;lives=3;frame=0;bullets=[];particles=[];rings=[];trails=[];ship={x:W/2,y:H/2,vx:0,vy:0,angle:-Math.PI/2,cool:0,inv:170,thrusting:false};startWave();$('pause').textContent='PAUSE';updateHud()}
 function fire(){if(!ship||ship.cool>0)return;ship.cool=10;
 const c=Math.cos(ship.angle),s=Math.sin(ship.angle);
 bullets.push({x:ship.x+c*28,y:ship.y+s*28,vx:ship.vx*.25+c*10.5,vy:ship.vy*.25+s*10.5,life:76});
@@ -227,9 +242,16 @@ beep(rock.size===3?125:rock.size===2?190:280,.2,'sawtooth',.21,55);
 if(rock.size>1){for(let j=0;j<2;j++){const a=Math.atan2(rock.vy,rock.vx)+(j?1:-1)*rand(.65,1.3),s=Math.hypot(rock.vx,rock.vy)*1.4+rand(.4,1);makeRock(rock.x+Math.cos(a)*12,rock.y+Math.sin(a)*12,rock.size-1,Math.cos(a)*s,Math.sin(a)*s)}}}
 function damage(){if(ship.inv>0||state!=='playing')return;lives--;burst(ship.x,ship.y,'#7aecff',65,1.75);shock(ship.x,ship.y,'#ff638b');beep(160,.4,'sawtooth',.38,38);
 ship.x=W/2;ship.y=H/2;ship.vx=0;ship.vy=0;ship.angle=-Math.PI/2;ship.inv=140;
-if(lives<=0){state='gameover';saveBest();applyAudioLevels();beep(95,.5,'triangle',.3,37)}updateHud()}
-function togglePause(){if(state==='playing'){state='paused';$('pause').textContent='RESUME'}else if(state==='paused'){state='playing';$('pause').textContent='PAUSE'}applyAudioLevels()}
+if(lives<=0){state='gameover';syncMobileStart();saveBest();applyAudioLevels();beep(95,.5,'triangle',.3,37)}updateHud()}
+function togglePause(){if(state==='playing'){state='paused';$('pause').textContent='RESUME'}else if(state==='paused'){state='playing';$('pause').textContent='PAUSE'}syncMobileStart();applyAudioLevels()}
 $('start').addEventListener('click',reset);$('pause').addEventListener('click',()=>{initAudio();togglePause()});
+function mobileTapStart(e){
+ if(e)e.preventDefault();
+ if(state==='paused'){initAudio();togglePause()}
+ else if(state==='menu'||state==='gameover')reset();
+}
+$('mobileStart').addEventListener('click',mobileTapStart);
+canvas.addEventListener('pointerdown',e=>{if(mobileMode()&&state!=='playing')mobileTapStart(e)});
 $('mute').addEventListener('click',()=>{muted=!muted;const button=$('mute');button.textContent=muted?'UNMUTE ALL':'MUTE ALL';button.setAttribute('aria-pressed',String(muted));button.setAttribute('aria-label',muted?'Unmute all music and sound effects':'Mute all music and sound effects');if(!muted)initAudio();applyAudioLevels()});
 $('volume').addEventListener('input',e=>{$('volLabel').textContent=e.target.value+'%';try{localStorage.setItem('asteroidRush.sfxVolume',e.target.value)}catch(e){};applyAudioLevels()});
 document.addEventListener('keydown',e=>{if(e.target instanceof HTMLElement&&e.target.closest('input,select,textarea,[contenteditable="true"]'))return;
@@ -239,10 +261,17 @@ keys.add(e.code);if(e.code==='Enter')reset();if(e.code==='KeyP')togglePause();if
 document.addEventListener('keyup',e=>keys.delete(e.code));
 window.addEventListener('blur',()=>{keys.clear();touch.clear()});document.addEventListener('visibilitychange',applyAudioLevels);
 document.querySelectorAll('[data-control]').forEach(button=>{
-const control=button.dataset.control;
-function off(e){if(e) e.preventDefault();touch.delete(control);button.classList.remove('held')}
-button.addEventListener('pointerdown',e=>{e.preventDefault();button.setPointerCapture(e.pointerId);touch.add(control);button.classList.add('held');initAudio();if(state==='menu'||state==='gameover')reset()});
-button.addEventListener('pointerup',off);button.addEventListener('pointercancel',off);button.addEventListener('lostpointercapture',off)});
+ const control=button.dataset.control,pointers=new Set();
+ function off(e){if(e){e.preventDefault();pointers.delete(e.pointerId)}else pointers.clear();
+  if(!pointers.size){touch.delete(control);button.classList.remove('held')}}
+ button.addEventListener('pointerdown',e=>{
+  e.preventDefault();pointers.add(e.pointerId);touch.add(control);button.classList.add('held');
+  try{button.setPointerCapture(e.pointerId)}catch(err){}
+  initAudio();if(state==='menu'||state==='gameover')reset();
+ });
+ button.addEventListener('pointerup',off);button.addEventListener('pointercancel',off);button.addEventListener('lostpointercapture',off);
+ window.addEventListener('blur',()=>off());
+});
 function tick(dt){frame+=dt;
 for(const star of stars){star.x-=star.v*.14*dt;if(star.x<0)star.x=W}
 for(const p of particles){p.x+=p.vx*dt;p.y+=p.vy*dt;p.vx*=Math.pow(.975,dt);p.vy*=Math.pow(.975,dt);p.life-=dt}
@@ -259,7 +288,8 @@ const speed=Math.hypot(ship.vx,ship.vy),limit=6.4;if(speed>limit){ship.vx*=limit
 ship.x+=ship.vx*dt;ship.y+=ship.vy*dt;wrap(ship,20);
 if(Math.hypot(ship.vx,ship.vy)>.6||ship.thrusting){trails.push({x:ship.x,y:ship.y,angle:ship.angle,life:21,max:21});if(trails.length>33)trails.shift()}
 for(const tr of trails)tr.life-=dt;trails=trails.filter(tr=>tr.life>0);
-ship.inv=Math.max(0,ship.inv-dt);ship.cool=Math.max(0,ship.cool-dt);if(held('fire'))fire();
+ship.inv=Math.max(0,ship.inv-dt);ship.cool=Math.max(0,ship.cool-dt);
+if(held('fire')||mobileMode())fire();
 for(const r of rocks){r.x+=r.vx*dt;r.y+=r.vy*dt;r.angle+=r.spin*dt;wrap(r,r.r)}
 for(const b of bullets){b.x+=b.vx*dt;b.y+=b.vy*dt;b.life-=dt;wrap(b)}
 for(let i=bullets.length-1;i>=0;i--){const b=bullets[i];if(b.life<=0){bullets.splice(i,1);continue}
@@ -354,7 +384,7 @@ if(state==='gameover'){centerText('GAME OVER',H*.39,54,'#ff9db4');centerText('FI
 function render(){drawBackdrop();for(const r of rocks)drawRock(r);drawEffects();drawShip();overlay()}
 for(let i=0;i<7;i++)makeRock(rand(50,W-50),rand(50,H-50),i%3+1,rand(-.65,.65),rand(-.65,.65));
 let last=0;function loop(now){const dt=Math.min(2.3,(now-last)/16.6667||1);last=now;tick(dt);render();requestAnimationFrame(loop)}
-updateHud();requestAnimationFrame(loop);
+updateHud();syncMobileStart();requestAnimationFrame(loop);
 })();
 </script>
 </body></html>
