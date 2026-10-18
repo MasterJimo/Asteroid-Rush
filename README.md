@@ -27,11 +27,12 @@ Rozbijaj asteroidy na coraz mniejsze części, unikaj kolizji i przechodź kolej
 
 ## Muzyka i efekty
 
-W panelu **Settings** można ustawić oddzielnie głośność **SFX** (efekty) i **Music** (muzyka), a także wybrać jeden z dwóch utworów:
+W panelu **Settings** można ustawić oddzielnie głośność **SFX** (efekty) i **Music** (muzyka), a także wybrać jeden z trzech oryginalnych utworów:
 
 - **Nebula Drift — Chill**: spokojne, kosmiczne brzmienie.
 - **Bass Reactor — Techno**: szybszy rytm i mocny elektroniczny bas.
+- **Vector Frenzy — Hyper Techno (192 BPM)**: bardzo szybki, intensywny elektroniczny utwór z mocną perkusją i dynamicznym arpeggiem.
 
-Muzyka startuje po rozpoczęciu gry, zatrzymuje się przy pauzie i końcu rozgrywki. Przycisk **Sound** wycisza oba kanały. Cała muzyka jest generowana lokalnie przez przeglądarkę — nie wymaga pobierania plików audio.
+Muzyka startuje po rozpoczęciu gry, zatrzymuje się przy pauzie i końcu rozgrywki. Przycisk **Mute All** wycisza jednocześnie muzykę i SFX. Cała muzyka jest generowana lokalnie przez przeglądarkę — nie wymaga pobierania plików audio.
 
 Wszystko jest zawarte w pojedynczym pliku `index.html` — bez zewnętrznych zasobów, bibliotek i połączenia z internetem.
