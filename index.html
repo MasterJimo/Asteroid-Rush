@@ -87,7 +87,7 @@ $('soundtrack').value=selectedTrack;
 function applyAudioLevels(){if(!audio||!sfxBus||!musicBus)return;
 const now=audio.currentTime;
 sfxBus.gain.setTargetAtTime(muted?0:Number($('volume').value)/100*.42,now,.02);
-musicBus.gain.setTargetAtTime(muted?0:Number($('musicVolume').value)/100*.38,now,.03);
+musicBus.gain.setTargetAtTime(muted||state!=='playing'||document.hidden?0:Number($('musicVolume').value)/100*.38,now,.03);
 }
 function initAudio(){try{
 if(!audio){audio=new(window.AudioContext||window.webkitAudioContext)();
@@ -181,7 +181,7 @@ for(let i=0;i<count;i++){let x=0,y=0;for(let n=0;n<80;n++){x=rand(65,W-65);y=ran
 const toward=Math.atan2(ship.y-y,ship.x-x)+rand(-1.8,1.8),spd=rand(.7,1.4)+wave*.11;
 makeRock(x,y,3,Math.cos(toward)*spd,Math.sin(toward)*spd)}
 ship.inv=150;shock(ship.x,ship.y,'#60e8ff');beep(300,.23,'triangle',.15,560);updateHud()}
-function reset(){initAudio();resetMusicSequence();state='playing';score=0;wave=1;lives=3;frame=0;bullets=[];particles=[];rings=[];trails=[];ship={x:W/2,y:H/2,vx:0,vy:0,angle:-Math.PI/2,cool:0,inv:170,thrusting:false};startWave();$('pause').textContent='PAUSE';updateHud()}
+function reset(){initAudio();resetMusicSequence();state='playing';applyAudioLevels();score=0;wave=1;lives=3;frame=0;bullets=[];particles=[];rings=[];trails=[];ship={x:W/2,y:H/2,vx:0,vy:0,angle:-Math.PI/2,cool:0,inv:170,thrusting:false};startWave();$('pause').textContent='PAUSE';updateHud()}
 function fire(){if(!ship||ship.cool>0)return;ship.cool=10;
 const c=Math.cos(ship.angle),s=Math.sin(ship.angle);
 bullets.push({x:ship.x+c*28,y:ship.y+s*28,vx:ship.vx*.25+c*10.5,vy:ship.vy*.25+s*10.5,life:76});
@@ -195,8 +195,8 @@ beep(rock.size===3?125:rock.size===2?190:280,.2,'sawtooth',.21,55);
 if(rock.size>1){for(let j=0;j<2;j++){const a=Math.atan2(rock.vy,rock.vx)+(j?1:-1)*rand(.65,1.3),s=Math.hypot(rock.vx,rock.vy)*1.4+rand(.4,1);makeRock(rock.x+Math.cos(a)*12,rock.y+Math.sin(a)*12,rock.size-1,Math.cos(a)*s,Math.sin(a)*s)}}}
 function damage(){if(ship.inv>0||state!=='playing')return;lives--;burst(ship.x,ship.y,'#7aecff',65,1.75);shock(ship.x,ship.y,'#ff638b');beep(160,.4,'sawtooth',.38,38);
 ship.x=W/2;ship.y=H/2;ship.vx=0;ship.vy=0;ship.angle=-Math.PI/2;ship.inv=140;
-if(lives<=0){state='gameover';saveBest();beep(95,.5,'triangle',.3,37)}updateHud()}
-function togglePause(){if(state==='playing'){state='paused';$('pause').textContent='RESUME'}else if(state==='paused'){state='playing';$('pause').textContent='PAUSE'}}
+if(lives<=0){state='gameover';saveBest();applyAudioLevels();beep(95,.5,'triangle',.3,37)}updateHud()}
+function togglePause(){if(state==='playing'){state='paused';$('pause').textContent='RESUME'}else if(state==='paused'){state='playing';$('pause').textContent='PAUSE'}applyAudioLevels()}
 $('start').addEventListener('click',reset);$('pause').addEventListener('click',()=>{initAudio();togglePause()});
 $('mute').addEventListener('click',()=>{muted=!muted;$('mute').textContent=muted?'SOUND: OFF':'SOUND: ON';if(!muted)initAudio();applyAudioLevels()});
 $('volume').addEventListener('input',e=>{$('volLabel').textContent=e.target.value+'%';applyAudioLevels()});
@@ -205,7 +205,7 @@ if(['ArrowUp','ArrowLeft','ArrowRight','Space','Enter'].includes(e.code))e.preve
 if(e.repeat&&(e.code==='Enter'||e.code==='KeyP'))return;
 keys.add(e.code);if(e.code==='Enter')reset();if(e.code==='KeyP')togglePause();if(e.code==='Space'&&state==='menu')reset();initAudio()});
 document.addEventListener('keyup',e=>keys.delete(e.code));
-window.addEventListener('blur',()=>{keys.clear();touch.clear()});
+window.addEventListener('blur',()=>{keys.clear();touch.clear()});document.addEventListener('visibilitychange',applyAudioLevels);
 document.querySelectorAll('[data-control]').forEach(button=>{
 const control=button.dataset.control;
 function off(e){if(e) e.preventDefault();touch.delete(control);button.classList.remove('held')}
