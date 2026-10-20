@@ -19,8 +19,13 @@ canvas{display:block;width:100%;height:auto;aspect-ratio:3/2;touch-action:none}
 .screen:after{content:"";pointer-events:none;position:absolute;inset:0;box-shadow:inset 0 0 45px #0208179c;border-radius:15px}
 .actions{display:grid;gap:10px}.actions button{min-height:43px;padding:11px;border:1px solid #3586b9;border-radius:9px;color:#ecfaff;font-weight:800;font-size:13px;letter-spacing:.08em;background:linear-gradient(110deg,#16457c,#0d274a);box-shadow:inset 0 1px #ffffff1b}
 .actions button.primary{border-color:#4de2ff;background:linear-gradient(110deg,#006fa8,#1150a5);box-shadow:0 0 23px #0076ff32}
-.actions button:hover{filter:brightness(1.19)}.actions .desktop-auto-fire{border-color:#327e91;background:linear-gradient(110deg,#0e3e56,#112c40);color:#b2e9f4}.actions .desktop-auto-fire[aria-pressed="true"]{border-color:#65eebb;background:linear-gradient(110deg,#126954,#124c66);color:#e3fff0;box-shadow:0 0 16px #3fe9a234,inset 0 1px #ffffff22}.control-box{border-top:1px solid #ffffff25;margin-top:21px;padding-top:18px}.control-box h3{font-size:19px;letter-spacing:.12em;text-align:center;color:#8adfff;margin-bottom:14px}
-.guide{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:13px 0;border-bottom:1px solid #ffffff1a;font-size:15px;font-weight:800;line-height:1.35}.guide span{color:#d2e7fa}.guide b{color:#80e1ff;text-align:right}
+.actions button:hover{filter:brightness(1.19)}.actions .desktop-auto-fire{border-color:#327e91;background:linear-gradient(110deg,#0e3e56,#112c40);color:#b2e9f4}.actions .desktop-auto-fire[aria-pressed="true"]{border-color:#65eebb;background:linear-gradient(110deg,#126954,#124c66);color:#e3fff0;box-shadow:0 0 16px #3fe9a234,inset 0 1px #ffffff22}
+
+.info-links{margin-top:22px;padding-top:17px;border-top:1px solid #ffffff25;display:grid;gap:9px}
+.info-links a{display:block;min-height:43px;padding:12px 11px;border:1px solid #347eac;border-radius:9px;background:linear-gradient(110deg,#0e315b,#0b2140);color:#c1f5ff;text-align:center;text-decoration:none;font-size:12px;font-weight:800;letter-spacing:.06em;line-height:1.4}
+.info-links a:hover{border-color:#67e9ff;background:#164c79}
+.info-links a:focus-visible{outline:3px solid #8af0ff;outline-offset:3px}
+
 .volume{display:flex;justify-content:space-between;gap:6px;color:#a7c1de;font-size:13px;font-weight:750;margin-top:20px}input[type=range]{width:100%;accent-color:#5fe4ff;cursor:pointer;margin:11px 0 0}
 .track-label{display:block;color:#a7c1de;font-size:13px;font-weight:750;letter-spacing:.06em;margin:20px 0 9px}#soundtrack{display:block;width:100%;padding:12px 9px;background:#0b2040;color:#e3faff;border:1px solid #418bb8;border-radius:9px;font-size:13px;font-weight:800;cursor:pointer}#soundtrack:focus-visible{outline:2px solid #81eaff;outline-offset:2px}
 .mobile-pad,.mobile-hint,.mobile-start{display:none}
@@ -31,7 +36,7 @@ canvas{display:block;width:100%;height:auto;aspect-ratio:3/2;touch-action:none}
 .mobile-start small{font-size:10px;font-weight:800;letter-spacing:.1em;color:#a9cfe1}
 .mobile-hint{font-size:11px;color:#7fbedb;font-weight:800;text-align:center;letter-spacing:.09em;margin-top:8px}
 @media(max-width:980px){.layout{grid-template-columns:minmax(235px,285px) minmax(0,960px)}.stats{grid-column:1/-1;grid-row:2;display:flex;gap:20px;align-items:center;justify-content:space-around}.stats h2{margin:0}.stats .stat{border:0;padding:0}.settings{grid-column:1;grid-row:1}.arena{grid-column:2;grid-row:1}.site{max-width:1200px}}
-@media(max-width:760px), (pointer:coarse) and (max-width:1024px){.site{padding:10px 8px 20px}.masthead{margin-bottom:9px}.layout{display:flex;flex-direction:column;gap:12px}.arena,.settings,.stats{width:100%}.settings{order:2}.stats{order:3;display:flex;flex-wrap:wrap}.stats h2{display:none}.stats .stat strong{font-size:21px}.screen{border-radius:10px}.mobile-start:not([hidden]){display:flex}.mobile-pad{display:flex;gap:12px;margin-top:12px}.mobile-hint{display:block}.turn-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;flex:2;min-width:0}.mobile-pad button{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2px;min-height:76px;min-width:0;border-radius:15px;border:1px solid #397fb6;color:#cbf7ff;background:linear-gradient(165deg,#183b71,#091935);font-size:30px;font-weight:900;box-shadow:inset 0 1px #b6f5ff29;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent;touch-action:none}.mobile-pad button small{font-size:11px;letter-spacing:.09em;font-weight:900}.mobile-pad button:active,.mobile-pad button.held{background:linear-gradient(160deg,#127bb2,#164c98);box-shadow:0 0 18px #25bbff55}.mobile-pad .boost{flex:1;color:#fff1cd;border-color:#d18a5e;background:linear-gradient(160deg,#8b4639,#442741)}.panel{padding:13px}.panel h2{margin-bottom:12px}.actions{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.actions button{font-size:11px;padding:8px 3px}.guide{font-size:15px}.actions .desktop-auto-fire{display:none}}
+@media(max-width:760px), (pointer:coarse) and (max-width:1024px){.site{padding:10px 8px 20px}.masthead{margin-bottom:9px}.layout{display:flex;flex-direction:column;gap:12px}.arena,.settings,.stats{width:100%}.settings{order:2}.stats{order:3;display:flex;flex-wrap:wrap}.stats h2{display:none}.stats .stat strong{font-size:21px}.screen{border-radius:10px}.mobile-start:not([hidden]){display:flex}.mobile-pad{display:flex;gap:12px;margin-top:12px}.mobile-hint{display:block}.turn-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;flex:2;min-width:0}.mobile-pad button{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2px;min-height:76px;min-width:0;border-radius:15px;border:1px solid #397fb6;color:#cbf7ff;background:linear-gradient(165deg,#183b71,#091935);font-size:30px;font-weight:900;box-shadow:inset 0 1px #b6f5ff29;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent;touch-action:none}.mobile-pad button small{font-size:11px;letter-spacing:.09em;font-weight:900}.mobile-pad button:active,.mobile-pad button.held{background:linear-gradient(160deg,#127bb2,#164c98);box-shadow:0 0 18px #25bbff55}.mobile-pad .boost{flex:1;color:#fff1cd;border-color:#d18a5e;background:linear-gradient(160deg,#8b4639,#442741)}.panel{padding:13px}.panel h2{margin-bottom:12px}.actions{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.actions button{font-size:11px;padding:8px 3px}.actions .desktop-auto-fire{display:none}}
 @media(max-width:390px){.mobile-pad{gap:7px}.turn-controls{gap:7px}.mobile-pad button{min-height:65px}.masthead h1{font-size:28px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
 </style>
@@ -46,13 +51,11 @@ canvas{display:block;width:100%;height:auto;aspect-ratio:3/2;touch-action:none}
 <div class="volume"><label for="volume">✦ SFX VOLUME</label><span id="volLabel">45%</span></div><input id="volume" type="range" min="0" max="100" value="45">
 <div class="volume"><label for="musicVolume">♫ MUSIC VOLUME</label><span id="musicVolLabel">7%</span></div><input id="musicVolume" type="range" min="0" max="100" value="7">
 <label class="track-label" for="soundtrack">♫ SOUNDTRACK</label><select id="soundtrack"><option value="ambient">01 · NEBULA DRIFT — CHILL</option><option value="file">02 · FIGHTING THE AI — 120 BPM</option></select>
-<div class="control-box"><h3>🎮 CONTROLS</h3>
-<div class="guide"><span>← / → or A / D</span><b>ROTATE</b></div>
-<div class="guide"><span>↑ or W</span><b>THRUST</b></div>
-<div class="guide"><span>SPACE</span><b>FIRE</b></div>
-<div class="guide"><span>P</span><b>PAUSE</b></div>
-<div class="guide"><span>ENTER</span><b>START / RESTART</b></div>
-</div>
+<nav class="info-links" aria-label="Game information and privacy">
+<a href="about.html">ℹ ABOUT &amp; HOW TO PLAY</a>
+<a href="privacy.html">⚖ PRIVACY POLICY</a>
+<a href="privacy.html#storage">◈ DATA &amp; STORAGE</a>
+</nav>
 </aside>
 <main class="arena">
 <div class="screen"><canvas id="game" width="960" height="640" aria-label="Asteroid Rush arcade game"></canvas>
