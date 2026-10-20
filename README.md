@@ -1,0 +1,62 @@
+# Asteroid Rush ☄️
+
+**Asteroid Rush** is a free, single-player asteroid survival shooter for desktop and mobile browsers. Rotate your ship, boost through space, blast asteroids and chase a new high score.
+
+## How to play
+
+1. Open the game and press **Enter** or **START / RESTART** (on mobile, tap **TAP TO START**).
+2. Rotate your ship, use thrust to escape danger and fire at incoming asteroids.
+3. Large asteroids split into smaller ones when hit. Destroy them all to clear the wave and continue playing.
+
+### Controls
+
+| Action | Keyboard | Phone / tablet |
+| --- | --- | --- |
+| Rotate left / right | **← / →** or **A / D** | **LEFT / RIGHT** |
+| Thrust / boost | **↑** or **W** | **BOOST** |
+| Shoot (hold to repeat) | **Space** | **Automatic fire** |
+| Start / restart | **Enter** or **START / RESTART** | **TAP TO START / RESTART** |
+| Pause / resume | **P** or **PAUSE / RESUME** | **PAUSE / RESUME** button |
+| Optional automatic shooting | **AUTO FIRE** toggle in Settings | Already enabled automatically |
+
+### Game rules and settings
+
+- Start each run with **3 lives**. Colliding with an asteroid costs a life.
+- Destroying large, medium and small asteroids awards **20, 50 and 100 points** respectively.
+- Clearing the field advances to the next wave; bigger asteroids break apart into smaller ones.
+- Your **high score** is stored locally in your browser, with no online leaderboard.
+- Choose between **Nebula Drift** and **Fighting the AI**, adjust **MUSIC** and **SFX** volume independently or select **MUTE ALL**.
+
+See [About & How to Play](about.html) for more information.
+
+## Assets and Credits
+
+The game uses graphics drawn directly by its JavaScript/HTML Canvas code, procedural sound effects, a procedural ambient soundtrack and **one downloaded third-party music file**. The downloaded track's creator, original source, license and in-repository location are listed below.
+
+| Asset / contribution | Creator / credit | Location / original source | License / notes |
+| --- | --- | --- | --- |
+| Game and project | **MrJim** ([MasterJimo](https://github.com/MasterJimo)) | [`index.html`](index.html); [`about.html`](about.html) | Project creator credited in-game |
+| Spaceship, asteroids, bullets, starfield and visual effects | Programmatic graphics in the Asteroid Rush project | [`index.html`](index.html), including `drawShip()`, `drawRock()` and `drawBackdrop()` | Rendered with HTML Canvas; no downloaded image packs identified |
+| **Nebula Drift** (ambient music) | Procedural soundtrack implemented in the game | [`index.html`](index.html), `musicStep()` and `scheduleMusic()` | Generated with Web Audio API; no separate audio file |
+| **Fighting the AI** (120 BPM) | **Alexander Ehlers** (OpenGameArt username **tricksntraps**) | Local: [`ai_fight_120bpm.ogg`](ai_fight_120bpm.ogg). Original: [**T & T Free Cyberpunk Pack 2 — OpenGameArt**](https://opengameart.org/content/t-t-free-cyberpunk-pack-2) | **CC0 1.0** ([license](https://creativecommons.org/publicdomain/zero/1.0/)). Source's attribution notice: “Royalty Free Music by Alexander Ehlers.” |
+| Shooting, collisions and destruction sound effects | Procedural sound effects implemented in the game | [`index.html`](index.html), `beep()` and related Web Audio functions | No third-party SFX files identified |
+
+### Third-party music attribution
+
+**“Fighting the AI” — Alexander Ehlers (tricksntraps)**
+
+- **Original collection:** [T & T Free Cyberpunk Pack 2](https://opengameart.org/content/t-t-free-cyberpunk-pack-2), published on **OpenGameArt.org** by **tricksntraps**.
+- **Original filename:** `ai_fight_120bpm.ogg`.
+- **File in this repository:** [`ai_fight_120bpm.ogg`](ai_fight_120bpm.ogg), located in the repository root and loaded by [`index.html`](index.html).
+- **License:** [Creative Commons CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/).
+- **Artist credit requested on the source page:** **Royalty Free Music by Alexander Ehlers**.
+
+Thanks to **Alexander Ehlers** for making this music available! The **CC0 designation applies to the music published under that license**, not automatically to the rest of the game's source code or artwork.
+
+**Asset source note:** No other downloaded third-party graphics, sound packs or music files are identified in the tracked repository. New external assets should be documented here with their authors, original URLs, licenses and file locations.
+
+## Play and project
+
+- **Source:** [GitHub — MasterJimo/Asteroid-Rush](https://github.com/MasterJimo/Asteroid-Rush)
+- **Play:** Open the deployed website or load [`index.html`](index.html) in a browser that supports the game and its audio.
+- **Privacy:** [Privacy Policy](privacy.html)
